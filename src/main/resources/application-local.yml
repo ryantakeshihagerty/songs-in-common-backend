@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://mongodbuser:secret@songs-in-common.ndahgg9.mongodb.net/test
+      database: songs-in-common
+
+spotify:
+  url:
+    authorizeUrl: https://accounts.spotify.com/authorize
+    tokenUrl: https://accounts.spotify.com/api/token
+    tracksUrl: https://api.spotify.com/v1/me/tracks
+    createPlaylistUrl: https://api.spotify.com/v1/users/user_id/playlists
+    addToPlaylistUrl: https://api.spotify.com/v1/playlists/playlist_id/tracks
+  clientId: 457af0af693d4375a650bb356c720ee2
+  clientSecret: secret
+
+application:
+  url:
+    redirect: http://localhost:8080/callback
+    explore: http://localhost:3000/explore
+    share: http://localhost:3000/share
