@@ -68,7 +68,7 @@ public class SpotifyService {
                 TracksResponse.class
         );
         TracksResponse tracksResponse = responseEntity.getBody();
-        logger.info("Initial tracks response: {}", tracksResponse);
+        logger.info("Initial tracks response for user {}: {}", userId, tracksResponse);
 
         // Create UserSavedTracks obj to add all tracks. Will store this object in MongoDb after iteration done.
         UserSavedTracks userSavedTracks = new UserSavedTracks(userId);
@@ -79,7 +79,7 @@ public class SpotifyService {
             userSavedTracks.addTrack(track);
         }
 
-        // Keep iterating until we go through all of this users tracks
+        // Keep iterating until we get all tracks for this user
         int count = 1;
         while (tracksResponse.getNext() != null) {
             responseEntity = restTemplate.exchange(
@@ -101,7 +101,8 @@ public class SpotifyService {
             count++;
         }
 
-        // Done iterating, store UserSavedTracks obj to MongoDB
+        // Done iterating, store UserSavedTracks object to MongoDB
+        logger.info("Saving to database: {}", userSavedTracks);
         savedTracksRepository.save(userSavedTracks);
 
     }
@@ -167,7 +168,7 @@ public class SpotifyService {
 
     private void addTracksToPlaylist(String userId, String playlistId, List<String> trackUris) {
         if (trackUris.size() > 100) {
-            logger.error("cant add more than 100 tracks at once");
+            logger.error("Error for user: {}. Spotify Web API does not support adding more than 100 tracks at once", userId);
         }
 
         // Set headers

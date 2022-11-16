@@ -1,4 +1,4 @@
-package com.songsincommon.songsincommon.services.impl;
+package com.songsincommon.songsincommon.services;
 
 import com.songsincommon.songsincommon.models.mysql.Session;
 import com.songsincommon.songsincommon.repository.SessionRepository;

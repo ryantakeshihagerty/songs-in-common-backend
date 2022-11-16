@@ -19,3 +19,4 @@ application:
     redirect: http://localhost:8080/callback
     explore: http://localhost:3000/explore
     share: http://localhost:3000/share
+    results: http://localhost:3000/results
